@@ -3,6 +3,8 @@ import cv2
 from cv2 import cuda_BufferPool # import cv2
 #from cv2 import cuda_BufferPool # import cv2
 import numpy as np
+import matplotlib.pyplot as plt
+
 
 
 #FOR LOOP FOR LOADING THE IMAGES IN FOR PRE PROCESSING
@@ -32,6 +34,11 @@ for filename in os.listdir(imageFolder): #for images in the folder, check if its
         image_path = os.path.join(imageFolder, filename)
         image = cv2.imread(image_path)
         
+        
+        #DETERMINE THE COLOR
+        hsvGreen = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        #print(hsvGreen)
+        
         # Threshold the image using a binary threshold
         #blurring edges detection using canny and thresholding
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -42,13 +49,24 @@ for filename in os.listdir(imageFolder): #for images in the folder, check if its
         #cv2.drawContours(edgesDetect, contours, -1, (0, 255, 0), 3)
         images[filename] = thresh  # store the thresholded image in the dictionary with the filename as the key
         
+
+        
         # Display the processed image
         cv2.imshow('thresholded image', thresh)
         cv2.waitKey(0)
         
-# Now you can access each thresholded image by its filename key, for example:
-image1_thresh = images['image1.jpg']
-image2_thresh = images['image2.jpg']
+# Thresholded images
+#image1_thresh = images['image1.jpg']
+#image2_thresh = images['image2.jpg']
 
 
+#rows, cols, channels = image1_thresh.shape
 
+#plotting the image graph
+#plt.imshow(image1_thresh)
+#plt.show()
+
+#finding mean and median
+#mean_color = cv2.mean(image1_thresh)
+
+#median_color = cv2.mean(image2_thresh)
