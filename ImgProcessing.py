@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 #FOR LOOP FOR LOADING THE IMAGES IN FOR PRE PROCESSING
 #loading the folder of the iamges
-imageFolder = '/Users/minamakary/Downloads/MunoDataset'
+imageFolder = '/Users/minamakary/Documents/pde4434_cw2/myDataset/b0'
 
 
 for filename in os.listdir(imageFolder):
@@ -23,7 +23,7 @@ for filename in os.listdir(imageFolder):
 
 
 
-imageFolder = '/Users/minamakary/Downloads/MunoDataset'
+imageFolder = '/Users/minamakary/Documents/pde4434_cw2/myDataset/b0'
 
 images = {}  # creating a storage dictionary to save the images
 
@@ -48,7 +48,7 @@ for filename in os.listdir(imageFolder): #for images in the folder, check if its
         #contours, hierarchy = cv2.findContours(edgesDetect, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         #cv2.drawContours(edgesDetect, contours, -1, (0, 255, 0), 3)
         images[filename] = thresh  # store the thresholded image in the dictionary with the filename as the key
-        
+
 
         
         # Display the processed image
