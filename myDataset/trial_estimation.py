@@ -41,7 +41,7 @@ while vc.isOpened():
     rval, frame = vc.read()    # read video frames again at each loop, as long as the stream is open
     
     # Predict the color and display it on the live feed
-    img = cv2.resize(frame, (100, 100))
+    img = cv2.resize(frame, (224, 224))
     img_lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
     hist = cv2.calcHist([img_lab], [1, 2], None, [8, 8], [0, 256, 0, 256])
     hist = cv2.normalize(hist, hist).flatten()
