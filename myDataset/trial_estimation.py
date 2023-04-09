@@ -13,7 +13,7 @@ import tensorflow as tf
 data = []
 labels = []
 
-for color in ['blue_0', 'red_0',]:
+for color in ['blue_0', 'red_0','yellow_0','green_0']:
     folder_path = f"myDataset/{color}"
     for filename in os.listdir(folder_path):
         if filename.endswith(".jpg"):
