@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
-import tensorflow as tf
+from tensorflow import * #i used import tensorflow as tf but gave me illegal hardware instruction when i ran the code
 
 
 
@@ -37,8 +37,6 @@ knn_model.fit(X_train, y_train)
 y_pred = knn_model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print("Accuracy:", accuracy)
-
-
 
 
 # Test the model on live camera feed
