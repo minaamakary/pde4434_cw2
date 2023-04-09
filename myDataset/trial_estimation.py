@@ -8,7 +8,7 @@ from sklearn.metrics import accuracy_score
 # Load the dataset
 data = []
 labels = []
-for i in range(6):
+for i in range(6): #why 6 though ??
     for j in ['blue_0_']:
         for k in range(1, 20):
             img = cv2.imread(f"myDataset/blue_0/{j}{k}.jpg")
@@ -31,6 +31,9 @@ knn_model.fit(X_train, y_train)
 y_pred = knn_model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print("Accuracy:", accuracy)
+
+
+
 
 # Test the model on live camera feed
 vc = cv2.VideoCapture(0) 
