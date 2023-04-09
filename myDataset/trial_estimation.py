@@ -5,14 +5,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
-
 # Load the dataset
 data = []
 labels = []
 for i in range(6):
-    for j in ['blue_']:
-        for k in range(1, 7):
-            img = cv2.imread(f"Mina_dataset/blue_1/{j}{k}.jpg")
+    for j in ['blue_0_']:
+        for k in range(1, 20):
+            img = cv2.imread(f"myDataset/blue_0/{j}{k}.jpg")
             img = cv2.resize(img, (224, 224))
             img = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
             hist = cv2.calcHist([img], [1, 2], None, [8, 8], [0, 256, 0, 256])
