@@ -5,8 +5,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
-from tensorflow import * #i used import tensorflow as tf but gave me illegal hardware instruction when i ran the code
 
+#from tensorflow import *   # Tensorflow still doesnt seem to integrate with mac 
+                            # even after installing the libraries it says 
+                            # "zsh: illegal hardware instruction  /usr/local/bin/python3"
 
 
 # Load the dataset
