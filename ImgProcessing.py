@@ -1,17 +1,16 @@
 import os
 import cv2
-#from cv2 import cuda_BufferPool 
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
-from tensorflow import *
+#from tensorflow import *
 
 #FOR LOOP FOR LOADING THE IMAGES IN FOR PRE PROCESSING
 #loading the folder of the iamges
-imageFolder = '/Users/minamakary/Documents/pde4434_cw2/myDataset/b0'
+imageFolder = '/Users/minamakary/Documents/pde4434_cw2/myDataset/blue_0'
 
 
 for filename in os.listdir(imageFolder):
@@ -25,7 +24,7 @@ for filename in os.listdir(imageFolder):
 
 
 
-imageFolder = '/Users/minamakary/Documents/pde4434_cw2/myDataset/b0'
+imageFolder = '/Users/minamakary/Documents/pde4434_cw2/myDataset/red_0'
 
 images = {}  # creating a storage dictionary to save the images
 
@@ -76,3 +75,23 @@ print (mean_stdDev_color)
 
 
 
+
+# Test the model on live camera feed
+vc = cv2.VideoCapture(1) 
+while vc.isOpened():
+    rval, frame = vc.read()    # read video frames again at each loop, as long as the stream is open
+    
+    # Predict the color and display it on the live feed
+    img = cv2.resize(frame, (100, 100))
+    img_lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
+    hist = cv2.calcHist([img_lab], [1, 2], None, [8, 8], [0, 256, 0, 256])
+    hist = cv2.normalize(hist, hist).flatten()
+    prediction = knn_model.predict([hist])[0]
+    cv2.putText(frame, prediction, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+    cv2.imshow("stream", frame)
+    
+    key = cv2.waitKey(1)       # allows user intervention without stopping the stream (pause in ms)
+    if key == 27:              # exit on ESC
+        break
+cv2.destroyWindow("stream")    # close image window upon exit
+vc.release()
