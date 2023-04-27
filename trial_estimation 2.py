@@ -1,35 +1,31 @@
 import os
 import cv2
 import numpy as np
-from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
-
-#from tensorflow import *   # Tensorflow still doesnt seem to integrate with mac 
-                            # even after installing the libraries it says 
-                            # "zsh: illegal hardware instruction  /usr/local/bin/python3"
-
+from sklearn.model_selection import train_test_split
 
 # Load the dataset
 data = []
 labels = []
 
-for color in ['blue_0', 'red_0','yellow_0','green_0']:
-    folder_path = f"myDataset/{color}"
-    for filename in os.listdir(folder_path):
-        if filename.endswith(".jpg"):
-            img_path = os.path.join(folder_path, filename)
-            img = cv2.imread(img_path)
-            img = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
-            hist = cv2.calcHist([img], [1, 2], None, [8, 8], [0, 256, 0, 256])
-            
-            hist = cv2.normalize(hist, hist).flatten()
-            data.append(hist)
-            labels.append(color)
+#for loop to read through the dataset
+for color in ['blue', 'red','yellow']:
+    for i in range(0,9):
+        folder_path = f"myDataset/{color}_{i}"
+        for filename in os.listdir(folder_path):
+            if filename.endswith(".jpg"):
+                img_path = os.path.join(folder_path, filename)
+                img = cv2.imread(img_path)
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
+                hist = cv2.calcHist([img], [1, 2], None, [8, 8], [0, 256, 0, 256])
+                hist = cv2.normalize(hist, hist).flatten()
+                data.append(hist)
+                labels.append(color)
 
-# Split the dataset
-X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.2)
+# Split the dataset with a testing size 0.1
+X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.1)
 
 # Train the KNN model
 knn_model = KNeighborsClassifier(n_neighbors=3)
