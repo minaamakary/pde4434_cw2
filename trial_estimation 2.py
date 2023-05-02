@@ -56,3 +56,4 @@ while vc.isOpened():
         break
 cv2.destroyWindow("stream")    # close image window upon exit
 vc.release()
+
